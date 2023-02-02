@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dstrategies-canary
+  namespace: user31-gitops-argocd
+spec:
+  destination:
+    name: ''
+    namespace: user31-canary
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: canary
+    repoURL: https://github.com/alvarolop/dstrategies-app-deployment
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
